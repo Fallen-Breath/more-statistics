@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "more-statistics",
+  "version": "1.0.0",
+
+  "name": "More Statistics",
+  "description": "Add more statistics to Minecraft",
+  "authors": [
+    "Fallen_Breath"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [
+    "more-statistics.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.1",
+    "minecraft": "1.15.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

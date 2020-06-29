@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.fallenbreath.morestatistics.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "StatsMixin",
+    "StatsAccessor",
+    "ServerStatHandlerMixin",
+    "PistonBlock_breakBedrockStatMixin",
+    "FireworkItem_fireworkBoostStat"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
