@@ -6,6 +6,7 @@
   "mixins": [
     "CustomPayloadC2SPacketAccessor",
     "FireworkItem_fireworkBoostStatMixin",
+    "MinecraftServerMixin",
     "PistonBlock_breakBedrockStatMixin",
     "ServerPlayNetworkHandlerMixin",
     "ServerStatHandlerMixin",

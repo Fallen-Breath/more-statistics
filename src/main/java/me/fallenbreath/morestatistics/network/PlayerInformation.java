@@ -13,10 +13,10 @@ public class PlayerInformation
 
 	public static void setAcceptedStatsList(ServerPlayerEntity player, List<String> list)
 	{
-		MoreStatistics.logger.info(String.format("Player %s Added with accepted stats list:", player.getName().getString()));
+		MoreStatistics.logger.debug(String.format("Player %s is querying with accepted statistics list:", player.getName().getString()));
 		for (String stat : list)
 		{
-			MoreStatistics.logger.info("- " + stat);
+			MoreStatistics.logger.debug("- " + stat);
 		}
 		statsListAcceptedByPlayer.put(player, list);
 	}
@@ -24,6 +24,11 @@ public class PlayerInformation
 	public static void removePlayer(ServerPlayerEntity player)
 	{
 		statsListAcceptedByPlayer.remove(player);
+	}
+
+	public static void removeAllPlayers()
+	{
+		statsListAcceptedByPlayer.clear();
 	}
 
 	public static List<String> getAcceptedStatsList(ServerPlayerEntity player)
