@@ -2,6 +2,7 @@ package me.fallenbreath.morestatistics.mixins;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.ServerStatHandler;
 import net.minecraft.stat.Stat;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,15 +21,15 @@ public abstract class ServerStatHandlerMixin
 					remap = false
 			)
 	)
-	private int dontPutNotVanillaStat(Object2IntMap<Stat<?>> map, Object obj, int value)
+	private int dontPutNotVanillaStat(Object2IntMap<Stat<?>> map, Object obj, int value, ServerPlayerEntity player)
 	{
-		if (MoreStatisticsRegistry.isCustomStat((Stat<?>)obj))
+		if (MoreStatisticsRegistry.canSend(player, (Stat<?>)obj))
 		{
-			return map.defaultReturnValue();
+			return map.put((Stat<?>)obj, value);
 		}
 		else
 		{
-			return map.put((Stat<?>)obj, value);
+			return map.defaultReturnValue();
 		}
 	}
 }

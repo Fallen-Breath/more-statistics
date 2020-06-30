@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(FireworkItem.class)
-public abstract class FireworkItem_fireworkBoostStat
+public abstract class FireworkItem_fireworkBoostStatMixin
 {
 	@Inject(
 			method = "use",

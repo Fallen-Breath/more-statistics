@@ -4,11 +4,16 @@
   "package": "me.fallenbreath.morestatistics.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "StatsMixin",
-    "StatsAccessor",
-    "ServerStatHandlerMixin",
+    "CustomPayloadC2SPacketAccessor",
+    "FireworkItem_fireworkBoostStatMixin",
     "PistonBlock_breakBedrockStatMixin",
-    "FireworkItem_fireworkBoostStat"
+    "ServerPlayNetworkHandlerMixin",
+    "ServerStatHandlerMixin",
+    "StatsAccessor",
+    "StatsMixin"
+  ],
+  "client": [
+    "StatsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

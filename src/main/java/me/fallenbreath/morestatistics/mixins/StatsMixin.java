@@ -12,6 +12,6 @@ public abstract class StatsMixin
 	static
 	{
 		MoreStatisticsRegistry.registerStatistics();
-		MoreStatistics.logger.info(String.format("%s enabled with %d new statistics", MoreStatistics.name, MoreStatisticsRegistry.stats.size()));
+		MoreStatistics.logger.info(String.format("%s enabled with %d new statistics", MoreStatistics.name, MoreStatisticsRegistry.getStatsList().size()));
 	}
 }
