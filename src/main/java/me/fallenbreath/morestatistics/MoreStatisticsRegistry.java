@@ -34,7 +34,7 @@ public class MoreStatisticsRegistry
 		{
 			statsSet.add(stat.toString());
 			statsList.add(stat.toString());
-			MoreStatistics.logger.info("Added stat " + stat);
+			MoreStatistics.logger.info("Added custom statistic " + stat);
 		}
 	}
 
