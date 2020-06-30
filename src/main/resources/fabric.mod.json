@@ -9,11 +9,11 @@
     "Fallen_Breath"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://github.com/Fallen-Breath/more-statistics",
+    "sources": "https://github.com/Fallen-Breath/more-statistics"
   },
 
-  "license": "",
+  "license": "GPL-3.0",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
