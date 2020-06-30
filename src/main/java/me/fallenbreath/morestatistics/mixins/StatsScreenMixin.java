@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
 @Mixin(StatsScreen.class)
-public class StatsScreenMixin extends Screen
+public abstract class StatsScreenMixin extends Screen
 {
 	public StatsScreenMixin(Screen parent, StatHandler statHandler)
 	{
