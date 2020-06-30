@@ -16,7 +16,7 @@ public class Util
 	{
 		if (world.getServer() != null)
 		{
-			Vec3d pos = new Vec3d(blockPos).add(0.5D, 0.5D, 0.5D);
+			Vec3d pos = Vec3d.ofCenter(blockPos);
 			world.getServer().getPlayerManager().getPlayerList().stream()
 					.filter(
 							player -> player.squaredDistanceTo(pos) <= radius * radius
