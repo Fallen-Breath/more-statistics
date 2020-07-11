@@ -11,7 +11,7 @@ If you have also installed it on your client you can query the custom statistics
 
 ## break_bedrock
 
-When a bedrock is deleted by a piston or a sticky piston, the nearest player to the bedrock within 5 blocks will increase this stat by 1
+When a bedrock is deleted by a piston or a sticky piston, the nearest non-spectator player to the bedrock within 5 blocks will increase this stat by 1
 
 Criteria: `minecraft.custom:minecraft.break_bedrock`
 
