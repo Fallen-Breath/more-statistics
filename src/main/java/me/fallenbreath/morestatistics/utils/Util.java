@@ -12,12 +12,15 @@ import java.util.List;
 
 public class Util
 {
-	public static void addStatsToNearestPlayers(World world, BlockPos blockPos, double radius, Identifier stat, int amount)
+	public static void addStatsToNearestPlayers(World world, BlockPos blockPos, double radius, Identifier stat, int amount, boolean noSpectator)
 	{
 		if (world.getServer() != null)
 		{
 			Vec3d pos = new Vec3d(blockPos).add(0.5D, 0.5D, 0.5D);
 			world.getServer().getPlayerManager().getPlayerList().stream()
+					.filter(
+							player -> !(noSpectator && player.isSpectator())
+					)
 					.filter(
 							player -> player.squaredDistanceTo(pos) <= radius * radius
 					)

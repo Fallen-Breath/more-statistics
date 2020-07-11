@@ -26,7 +26,7 @@ public abstract class PistonBlock_breakBedrockStatMixin
 	{
 		if (world.getBlockState(pos).getBlock() == Blocks.BEDROCK)
 		{
-			Util.addStatsToNearestPlayers(world, pos, 5, MoreStatisticsRegistry.BREAK_BEDROCK, 1);
+			Util.addStatsToNearestPlayers(world, pos, 5, MoreStatisticsRegistry.BREAK_BEDROCK, 1, true);
 		}
 		return world.removeBlock(pos, move);
 	}
