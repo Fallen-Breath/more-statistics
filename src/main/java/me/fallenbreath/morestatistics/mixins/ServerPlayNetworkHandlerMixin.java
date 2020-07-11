@@ -1,5 +1,6 @@
 package me.fallenbreath.morestatistics.mixins;
 
+import me.fallenbreath.morestatistics.interfaces.ICustomPayloadC2SPacket;
 import me.fallenbreath.morestatistics.network.Network;
 import me.fallenbreath.morestatistics.network.ServerHandler;
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
@@ -29,10 +30,10 @@ public abstract class ServerPlayNetworkHandlerMixin
 	{
 		synchronized (Network.sync)
 		{
-			Identifier channel = ((CustomPayloadC2SPacketAccessor) packet).getChannel();
+			Identifier channel = ((ICustomPayloadC2SPacket) packet).getPacketChannel();
 			if (Network.CHANNEL.equals(channel))
 			{
-				ServerHandler.handleStatsListUpdate(((CustomPayloadC2SPacketAccessor) packet).getData(), player);
+				ServerHandler.handleStatsListUpdate(((ICustomPayloadC2SPacket) packet).getPacketData(), player);
 				ci.cancel();
 			}
 		}

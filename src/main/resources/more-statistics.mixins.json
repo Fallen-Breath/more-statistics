@@ -4,7 +4,7 @@
   "package": "me.fallenbreath.morestatistics.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CustomPayloadC2SPacketAccessor",
+    "CustomPayloadC2SPacketMixin",
     "FireworkItem_fireworkBoostStatMixin",
     "MinecraftServerMixin",
     "PistonBlock_breakBedrockStatMixin",
