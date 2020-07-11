@@ -16,7 +16,7 @@ public class Util
 	{
 		if (world.getServer() != null)
 		{
-			Vec3d pos = Vec3d.ofCenter(blockPos);
+			Vec3d pos = new Vec3d(blockPos).add(0.5D, 0.5D, 0.5D);
 			world.getServer().getPlayerManager().getPlayerList().stream()
 					.filter(
 							player -> !(noSpectator && player.isSpectator())

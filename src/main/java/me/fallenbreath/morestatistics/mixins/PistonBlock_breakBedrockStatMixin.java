@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class PistonBlock_breakBedrockStatMixin
 {
 	@Redirect(
-			method = "onSyncedBlockEvent",
+			method = "onBlockAction",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/World;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"

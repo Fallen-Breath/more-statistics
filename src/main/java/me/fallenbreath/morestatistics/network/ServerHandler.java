@@ -1,8 +1,8 @@
 package me.fallenbreath.morestatistics.network;
 
 import me.fallenbreath.morestatistics.utils.Util;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.PacketByteBuf;
 
 import java.util.List;
 
