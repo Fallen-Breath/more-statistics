@@ -18,13 +18,13 @@ public class CustomPayloadC2SPacketMixin implements ICustomPayloadC2SPacket
 	private PacketByteBuf data;
 
 	@Override
-	public Identifier getPacketChannel()
+	public Identifier getMSPacketChannel()
 	{
 		return channel;
 	}
 
 	@Override
-	public PacketByteBuf getPacketData()
+	public PacketByteBuf getMSPacketData()
 	{
 		return new PacketByteBuf(this.data.copy());
 	}

@@ -30,10 +30,10 @@ public abstract class ServerPlayNetworkHandlerMixin
 	{
 		synchronized (Network.sync)
 		{
-			Identifier channel = ((ICustomPayloadC2SPacket) packet).getPacketChannel();
+			Identifier channel = ((ICustomPayloadC2SPacket) packet).getMSPacketChannel();
 			if (Network.CHANNEL.equals(channel))
 			{
-				ServerHandler.handleStatsListUpdate(((ICustomPayloadC2SPacket) packet).getPacketData(), player);
+				ServerHandler.handleStatsListUpdate(((ICustomPayloadC2SPacket) packet).getMSPacketData(), player);
 				ci.cancel();
 			}
 		}
