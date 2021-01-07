@@ -4,17 +4,18 @@
   "package": "me.fallenbreath.morestatistics.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CustomPayloadC2SPacketMixin",
-    "FireworkItem_fireworkBoostStatMixin",
-    "MinecraftServerMixin",
-    "PistonBlock_breakBedrockStatMixin",
-    "ServerPlayNetworkHandlerMixin",
-    "ServerStatHandlerMixin",
-    "StatsAccessor",
-    "StatsMixin"
+    "core.StatsAccessor",
+    "core.StatsMixin",
+    "network.CustomPayloadC2SPacketMixin",
+    "network.MinecraftServerMixin",
+    "network.ServerPlayNetworkHandlerMixin",
+    "network.ServerStatHandlerMixin",
+    "stats.FireworkItemMixin",
+    "stats.PistonBlockMixin",
+    "stats.ThrownEnderpearlEntityMixin"
   ],
   "client": [
-    "StatsScreenMixin"
+    "network.StatsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,6 +1,5 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.core;
 
-import me.fallenbreath.morestatistics.MoreStatistics;
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import net.minecraft.stat.Stats;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +11,5 @@ public abstract class StatsMixin
 	static
 	{
 		MoreStatisticsRegistry.registerStatistics();
-		MoreStatistics.logger.info(String.format("%s enabled with %d new statistics", MoreStatistics.name, MoreStatisticsRegistry.getStatsList().size()));
 	}
 }
