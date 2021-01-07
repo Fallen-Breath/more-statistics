@@ -18,7 +18,7 @@ public abstract class EnderPearlEntityMixin
 			method = "onCollision",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/entity/LivingEntity;requestTeleport(DDD)V",
+					target = "Lnet/minecraft/entity/Entity;requestTeleport(DDD)V",
 					ordinal = 0
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
