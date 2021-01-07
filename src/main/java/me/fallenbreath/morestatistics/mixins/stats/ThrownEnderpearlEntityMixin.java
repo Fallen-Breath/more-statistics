@@ -18,7 +18,8 @@ public abstract class ThrownEnderpearlEntityMixin
 			method = "onCollision",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/world/World;getGameRules()Lnet/minecraft/world/GameRules;"
+					target = "Lnet/minecraft/entity/LivingEntity;requestTeleport(DDD)V",
+					ordinal = 0
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
