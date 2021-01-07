@@ -1,4 +1,5 @@
 {
   "stat.minecraft.break_bedrock": "无头活塞破基岩数",
-  "stat.minecraft.firework_boost": "烟花加速次数"
+  "stat.minecraft.firework_boost": "烟花加速次数",
+  "stat.minecraft.ender_pearl_one_cm": "末影珍珠传送距离"
 }
