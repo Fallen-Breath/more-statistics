@@ -23,11 +23,11 @@ public abstract class EnderPearlEntityMixin
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void onEnderPearlHit(HitResult hitResult, CallbackInfo ci, Entity livingEntity)
+	private void onEnderPearlHit(HitResult hitResult, CallbackInfo ci, Entity entity)
 	{
-		if (livingEntity instanceof ServerPlayerEntity)
+		if (entity instanceof ServerPlayerEntity)
 		{
-			ServerPlayerEntity player = (ServerPlayerEntity)livingEntity;
+			ServerPlayerEntity player = (ServerPlayerEntity)entity;
 			int distance = Math.round(player.distanceTo((EnderPearlEntity)(Object)this) * 100.0F);
 			if (distance > 0) {
 				player.increaseStat(MoreStatisticsRegistry.ENDER_PEARL_ONE_CM, distance);
