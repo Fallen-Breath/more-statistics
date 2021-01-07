@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.network;
 
 import me.fallenbreath.morestatistics.interfaces.ICustomPayloadC2SPacket;
 import me.fallenbreath.morestatistics.network.Network;

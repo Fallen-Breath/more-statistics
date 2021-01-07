@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.stats;
 
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import me.fallenbreath.morestatistics.utils.Util;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 
 @Mixin(PistonBlock.class)
-public abstract class PistonBlock_breakBedrockStatMixin
+public abstract class PistonBlockMixin
 {
 	@Redirect(
 			method = "onSyncedBlockEvent",

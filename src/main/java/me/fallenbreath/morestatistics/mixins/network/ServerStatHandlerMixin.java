@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.network;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;

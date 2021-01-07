@@ -2,7 +2,7 @@ package me.fallenbreath.morestatistics;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import me.fallenbreath.morestatistics.mixins.StatsAccessor;
+import me.fallenbreath.morestatistics.mixins.core.StatsAccessor;
 import me.fallenbreath.morestatistics.network.PlayerInformation;
 import me.fallenbreath.morestatistics.utils.Util;
 import net.minecraft.nbt.CompoundTag;
@@ -18,13 +18,15 @@ public class MoreStatisticsRegistry
 {
 	public static Identifier BREAK_BEDROCK;
 	public static Identifier FIREWORK_BOOST;
-	private static final Set<String> statsSet = Sets.newHashSet();
-	private static final List<String> statsList = Lists.newArrayList();
+	public static Identifier ENDER_PEARL_ONE_CM;
+	private static final Set<String> STATS_SET = Sets.newHashSet();
 
 	public static void registerStatistics()
 	{
 		addStat(BREAK_BEDROCK = StatsAccessor.callRegister("break_bedrock", StatFormatter.DEFAULT));
 		addStat(FIREWORK_BOOST = StatsAccessor.callRegister("firework_boost", StatFormatter.DEFAULT));
+		addStat(ENDER_PEARL_ONE_CM = StatsAccessor.callRegister("ender_pearl_one_cm", StatFormatter.DISTANCE));
+		MoreStatistics.logger.info(String.format("%s enabled with %d new statistics", MoreStatistics.name, STATS_SET.size()));
 	}
 
 
@@ -32,8 +34,7 @@ public class MoreStatisticsRegistry
 	{
 		if (stat != null)
 		{
-			statsSet.add(stat.toString());
-			statsList.add(stat.toString());
+			STATS_SET.add(stat.toString());
 			MoreStatistics.logger.info("Added custom statistic " + stat);
 		}
 	}
@@ -41,14 +42,14 @@ public class MoreStatisticsRegistry
 	public static boolean canSend(ServerPlayerEntity player, Stat<?> stat)
 	{
 		String key = stat.getValue().toString();
-		boolean isVanillaStat = !statsSet.contains(key);
-		boolean playerAcceptThis = PlayerInformation.isPlayerAcceptStat(player, key);
+		boolean isVanillaStat = !STATS_SET.contains(key);
+		boolean playerAcceptThis = PlayerInformation.doesPlayerAcceptStat(player, key);
 		return isVanillaStat || playerAcceptThis;
 	}
 
 	public static List<String> getStatsList()
 	{
-		return statsList;
+		return Lists.newArrayList(STATS_SET);
 	}
 
 	public static CompoundTag getStatsListNbt()

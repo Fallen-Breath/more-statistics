@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.network;
 
 import io.netty.buffer.Unpooled;
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;

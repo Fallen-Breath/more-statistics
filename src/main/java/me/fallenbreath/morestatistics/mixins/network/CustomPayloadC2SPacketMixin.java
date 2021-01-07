@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.network;
 
 import me.fallenbreath.morestatistics.interfaces.ICustomPayloadC2SPacket;
 import net.minecraft.network.PacketByteBuf;
@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 
 @Mixin(CustomPayloadC2SPacket.class)
-public class CustomPayloadC2SPacketMixin implements ICustomPayloadC2SPacket
+public abstract class CustomPayloadC2SPacketMixin implements ICustomPayloadC2SPacket
 {
 	@Shadow
 	private Identifier channel;
