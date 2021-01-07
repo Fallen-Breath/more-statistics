@@ -1,7 +1,7 @@
 package me.fallenbreath.morestatistics.mixins.stats;
 
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.hit.HitResult;
@@ -23,7 +23,7 @@ public abstract class EnderPearlEntityMixin
 			),
 			locals = LocalCapture.CAPTURE_FAILHARD
 	)
-	private void onEnderPearlHit(HitResult hitResult, CallbackInfo ci, LivingEntity livingEntity)
+	private void onEnderPearlHit(HitResult hitResult, CallbackInfo ci, Entity livingEntity)
 	{
 		if (livingEntity instanceof ServerPlayerEntity)
 		{
