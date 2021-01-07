@@ -43,7 +43,7 @@ public class MoreStatisticsRegistry
 	{
 		String key = stat.getValue().toString();
 		boolean isVanillaStat = !STATS_SET.contains(key);
-		boolean playerAcceptThis = PlayerInformation.isPlayerAcceptStat(player, key);
+		boolean playerAcceptThis = PlayerInformation.doesPlayerAcceptStat(player, key);
 		return isVanillaStat || playerAcceptThis;
 	}
 

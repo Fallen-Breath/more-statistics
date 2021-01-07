@@ -36,7 +36,7 @@ public class PlayerInformation
 		return statsListAcceptedByPlayer.get(player);
 	}
 
-	public static boolean isPlayerAcceptStat(ServerPlayerEntity player, String stat)
+	public static boolean doesPlayerAcceptStat(ServerPlayerEntity player, String stat)
 	{
 		List<String> list = getAcceptedStatsList(player);
 		return list != null && list.contains(stat);
