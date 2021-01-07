@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.core;
 
 import net.minecraft.stat.StatFormatter;
 import net.minecraft.stat.StatType;
@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 public interface StatsAccessor
 {
 	@Invoker
-	public static Identifier callRegister(String string, StatFormatter statFormatter)
+	static Identifier callRegister(String string, StatFormatter statFormatter)
 	{
 		return null;
 	}
 
 	@Invoker
-	public static <T> StatType<T> callRegisterType(String string, Registry<T> registry)
+	static <T> StatType<T> callRegisterType(String string, Registry<T> registry)
 	{
 		return null;
 	}

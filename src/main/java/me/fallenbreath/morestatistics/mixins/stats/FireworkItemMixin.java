@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins;
+package me.fallenbreath.morestatistics.mixins.stats;
 
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(FireworkItem.class)
-public abstract class FireworkItem_fireworkBoostStatMixin
+public abstract class FireworkItemMixin
 {
 	@Inject(
 			method = "use",
