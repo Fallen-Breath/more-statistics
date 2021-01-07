@@ -10,9 +10,9 @@
     "network.MinecraftServerMixin",
     "network.ServerPlayNetworkHandlerMixin",
     "network.ServerStatHandlerMixin",
+    "stats.EnderPearlEntityMixin",
     "stats.FireworkItemMixin",
-    "stats.PistonBlockMixin",
-    "stats.ThrownEnderpearlEntityMixin"
+    "stats.PistonBlockMixin"
   ],
   "client": [
     "network.StatsScreenMixin"
