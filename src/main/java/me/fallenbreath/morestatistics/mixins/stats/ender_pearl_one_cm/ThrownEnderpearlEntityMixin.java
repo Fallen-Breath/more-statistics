@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins.stats;
+package me.fallenbreath.morestatistics.mixins.stats.ender_pearl_one_cm;
 
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import net.minecraft.entity.LivingEntity;

@@ -1,10 +1,11 @@
-package me.fallenbreath.morestatistics.mixins.stats;
+package me.fallenbreath.morestatistics.mixins.stats.break_bedrock;
 
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
-import me.fallenbreath.morestatistics.utils.Util;
+import me.fallenbreath.morestatistics.utils.PistonPlacingMemory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.PistonBlock;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,12 +24,16 @@ public abstract class PistonBlockMixin
 			),
 			require = 2
 	)
-	private void removeBlock(Args args, BlockState state, World world, BlockPos pos, int type, int data)
+	private void removeBlock(Args args, BlockState state, World world, BlockPos pistonPos, int type, int data)
 	{
 		BlockPos posToRemove = args.get(0);
 		if (world.getBlockState(posToRemove).getBlock() == Blocks.BEDROCK)
 		{
-			Util.addStatsToNearestPlayers(world, posToRemove, 5, MoreStatisticsRegistry.BREAK_BEDROCK, 1, true);
+			ServerPlayerEntity player = PistonPlacingMemory.getTheOneWhoJustPlacedPiston(world, pistonPos);
+			if (player != null)
+			{
+				player.increaseStat(MoreStatisticsRegistry.BREAK_BEDROCK, 1);
+			}
 		}
 	}
 }
