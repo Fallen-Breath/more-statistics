@@ -16,7 +16,7 @@ public class PistonPlacingMemory
 
 	public static void onPlayerPlacedPiston(ServerPlayerEntity player, BlockPos pos)
 	{
-		MEMORY.put(makePair(player.getServerWorld(), pos), player);
+		MEMORY.put(makePair(player.getWorld(), pos), player);
 	}
 
 	@Nullable
