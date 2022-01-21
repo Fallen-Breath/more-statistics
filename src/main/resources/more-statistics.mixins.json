@@ -5,18 +5,20 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "core.CommandManagerMixin",
-    "core.ScoreboardCriterionMixin",
     "core.scoreboard.ScoreboardCriterionArgumentTypeMixin",
+    "core.scoreboard.ScoreboardCriterionMixin",
     "core.stats.ServerStatHandlerMixin",
     "core.stats.StatsAccessor",
     "core.stats.StatsMixin",
     "network.CustomPayloadC2SPacketAccessor",
     "network.CustomPayloadS2CPacketAccessor",
     "network.ServerPlayNetworkHandlerMixin",
-    "scoreboard.BlockItemMixin",
-    "stats.EnderPearlEntityMixin",
-    "stats.FireworkItemMixin",
-    "stats.PistonBlockMixin"
+    "scoreboard.blockPlacedCount.BlockItemMixin",
+    "stats.break_bedrock.BlockItemMixin",
+    "stats.break_bedrock.MinecraftServerMixin",
+    "stats.break_bedrock.PistonBlockMixin",
+    "stats.ender_pearl_one_cm.EnderPearlEntityMixin",
+    "stats.firework_boost.FireworkItemMixin"
   ],
   "client": [
     "core.stats.StatsScreenMixin",

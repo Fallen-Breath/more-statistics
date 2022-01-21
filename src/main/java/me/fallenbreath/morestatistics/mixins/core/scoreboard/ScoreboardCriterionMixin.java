@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins.core;
+package me.fallenbreath.morestatistics.mixins.core.scoreboard;
 
 import me.fallenbreath.morestatistics.MoreStatisticsScoreboardCriterion;
 import net.minecraft.scoreboard.ScoreboardCriterion;
