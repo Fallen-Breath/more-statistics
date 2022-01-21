@@ -1,6 +1,7 @@
 package me.fallenbreath.morestatistics;
 
 import com.google.common.collect.Sets;
+import me.fallenbreath.morestatistics.mixins.core.scoreboard.ScoreboardCriterionAccessor;
 import net.minecraft.scoreboard.ScoreboardCriterion;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class MoreStatisticsScoreboardCriterion
 
 	private static ScoreboardCriterion createCriterion(String name)
 	{
-		ScoreboardCriterion scoreboardCriterion = new ScoreboardCriterion(name);
+		ScoreboardCriterion scoreboardCriterion = ScoreboardCriterionAccessor.invokeCreate(name);
 		SCOREBOARD_CRITERION_SET.add(scoreboardCriterion);
 		return scoreboardCriterion;
 	}

@@ -6,6 +6,7 @@
   "mixins": [
     "core.CommandManagerMixin",
     "core.ScoreboardCriterionMixin",
+    "core.scoreboard.ScoreboardCriterionAccessor",
     "core.scoreboard.ScoreboardCriterionArgumentTypeMixin",
     "core.stats.ServerStatHandlerMixin",
     "core.stats.StatsAccessor",
