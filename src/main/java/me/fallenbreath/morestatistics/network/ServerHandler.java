@@ -5,11 +5,11 @@ import me.fallenbreath.morestatistics.MoreStatisticsMod;
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import me.fallenbreath.morestatistics.MoreStatisticsScoreboardCriterion;
 import me.fallenbreath.morestatistics.utils.Util;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stat;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,7 +25,7 @@ public class ServerHandler
 		switch (id)
 		{
 			case Network.C2S.STATS_LIST:
-				CompoundTag nbt = Objects.requireNonNull(data.readCompoundTag());
+				NbtCompound nbt = Objects.requireNonNull(data.readNbt());
 				List<Identifier> list = Util.nbt2StringList(nbt).stream().map(Identifier::new).collect(Collectors.toList());
 				MoreStatisticsMod.LOGGER.debug("Received accepted stats list from player {}: {}", player.getName().getString(), list);
 				synchronized (LOCK)
@@ -38,7 +38,7 @@ public class ServerHandler
 				MoreStatisticsMod.LOGGER.debug("Received scoreboard criterion query from player {}", player.getName().getString());
 				player.networkHandler.sendPacket(Network.S2C.packet(buf -> buf.
 						writeVarInt(Network.S2C.SCOREBOARD_CRITERION_LIST).
-						writeCompoundTag(Util.stringList2Nbt(MoreStatisticsScoreboardCriterion.getCriterionNameList()))
+						writeNbt(Util.stringList2Nbt(MoreStatisticsScoreboardCriterion.getCriterionNameList()))
 				));
 				break;
 		}

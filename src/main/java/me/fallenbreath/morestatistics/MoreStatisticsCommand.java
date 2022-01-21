@@ -2,7 +2,7 @@ package me.fallenbreath.morestatistics;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.minecraft.command.arguments.ScoreHolderArgumentType;
+import net.minecraft.command.argument.ScoreHolderArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 

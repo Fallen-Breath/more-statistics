@@ -6,7 +6,7 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import me.fallenbreath.morestatistics.MoreStatisticsScoreboardCriterion;
 import me.fallenbreath.morestatistics.network.ClientHandler;
 import net.minecraft.client.network.ClientCommandSource;
-import net.minecraft.command.arguments.ObjectiveCriteriaArgumentType;
+import net.minecraft.command.argument.ScoreboardCriterionArgumentType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -15,8 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Mixin(ObjectiveCriteriaArgumentType.class)
-public abstract class ObjectiveCriteriaArgumentTypeMixin
+@Mixin(ScoreboardCriterionArgumentType.class)
+public abstract class ScoreboardCriterionArgumentTypeMixin
 {
 	@SuppressWarnings("InvalidInjectorMethodSignature")
 	@ModifyVariable(

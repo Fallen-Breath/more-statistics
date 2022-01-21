@@ -20,9 +20,9 @@ public abstract class StatsScreenMixin extends Screen
 	@Inject(method = "init", at = @At(value = "HEAD"))
 	private void onStatsScreenInit(CallbackInfo ci)
 	{
-		if (this.minecraft != null && this.minecraft.getNetworkHandler() != null)
+		if (this.client != null && this.client.getNetworkHandler() != null)
 		{
-			ClientHandler.sendAcceptedStatList(this.minecraft.getNetworkHandler());
+			ClientHandler.sendAcceptedStatList(this.client.getNetworkHandler());
 		}
 	}
 }
