@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "more-statistics",
-  "version": "1.1.0",
+  "version": "${version}",
 
   "name": "More Statistics",
   "description": "Add more statistics to Minecraft",
@@ -14,11 +14,12 @@
   },
 
   "license": "GPL-3.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/more-statistics/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
+      "me.fallenbreath.morestatistics.MoreStatisticsMod"
     ]
   },
   "mixins": [
@@ -28,8 +29,5 @@
   "depends": {
     "fabricloader": ">=0.7.1",
     "minecraft": "1.16.x"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }

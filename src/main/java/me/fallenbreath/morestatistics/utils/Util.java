@@ -18,18 +18,10 @@ public class Util
 		{
 			Vec3d pos = Vec3d.ofCenter(blockPos);
 			world.getServer().getPlayerManager().getPlayerList().stream()
-					.filter(
-							player -> !(noSpectator && player.isSpectator())
-					)
-					.filter(
-							player -> player.squaredDistanceTo(pos) <= radius * radius
-					)
-					.min(Comparator.comparingDouble(
-							player -> player.squaredDistanceTo(pos)
-					))
-					.ifPresent(
-							player -> player.increaseStat(stat, amount)
-					);
+					.filter(player -> !(noSpectator && player.isSpectator()))
+					.filter(player -> player.squaredDistanceTo(center) <= radius * radius)
+					.min(Comparator.comparingDouble(player -> player.squaredDistanceTo(center)))
+					.ifPresent(player -> player.increaseStat(stat, amount));
 		}
 	}
 
@@ -46,10 +38,6 @@ public class Util
 
 	public static List<String> nbt2StringList(CompoundTag nbt)
 	{
-		if (nbt == null)
-		{
-			return null;
-		}
 		List<String> list = Lists.newArrayList();
 		int length = nbt.getInt("length");
 		for (int i = 0; i < length; i++)
