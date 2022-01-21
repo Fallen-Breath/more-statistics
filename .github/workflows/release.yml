@@ -1,0 +1,92 @@
+name: Release
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      target_release_tag:
+        description: The tag of the release you want to append the artifact to
+        required: true
+
+
+jobs:
+  matrix_prep:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setmatrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: 'Display current branch/tag name'
+        run: echo ${{ github.ref_name }}
+
+      - id: setmatrix
+        uses: JoshuaTheMiller/conditional-build-matrix@0.0.1
+        with:
+          # inputFile: '.github/workflows/matrix_includes.json' # Default input file path
+          filter: '[? `${{ github.event_name }}` == `release` || `${{ github.ref_name }}` == branch]'
+
+      - name: 'Print matrix'
+        run: echo ${{ steps.setmatrix.outputs.matrix }}
+
+  release:
+    needs: matrix_prep
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ matrix.branch }}
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Cache gradle files
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ./.gradle/loom-cache
+          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle', 'gradle.properties', '**/*.accesswidener') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build with Gradle
+        run: |
+          chmod +x gradlew
+          ./gradlew build
+        env:
+          BUILD_RELEASE: true
+
+      - name: Find correct JAR
+        id: findjar
+        run: |
+          output="$(find build/libs/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
+          echo "::set-output name=jarname::$output"
+
+      - name: Upload to action artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: '[${{ matrix.branch }}] build-artifacts'
+          path: build/libs/
+
+      - name: Upload to Github release
+        if: ${{ github.event_name == 'release' }}
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/libs/${{ steps.findjar.outputs.jarname }}
+
+      - name: Upload to specific Github release
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/libs/${{ steps.findjar.outputs.jarname }}
+          tag_name: ${{ github.event.inputs.target_release_tag }}

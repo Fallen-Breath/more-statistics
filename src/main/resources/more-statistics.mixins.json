@@ -4,18 +4,23 @@
   "package": "me.fallenbreath.morestatistics.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "core.StatsAccessor",
-    "core.StatsMixin",
-    "network.CustomPayloadC2SPacketMixin",
-    "network.MinecraftServerMixin",
+    "core.CommandManagerMixin",
+    "core.ScoreboardCriterionMixin",
+    "core.scoreboard.ObjectiveCriteriaArgumentTypeMixin",
+    "core.stats.ServerStatHandlerMixin",
+    "core.stats.StatsAccessor",
+    "core.stats.StatsMixin",
+    "network.CustomPayloadC2SPacketAccessor",
+    "network.CustomPayloadS2CPacketAccessor",
     "network.ServerPlayNetworkHandlerMixin",
-    "network.ServerStatHandlerMixin",
+    "scoreboard.BlockItemMixin",
     "stats.FireworkItemMixin",
     "stats.PistonBlockMixin",
     "stats.ThrownEnderpearlEntityMixin"
   ],
   "client": [
-    "network.StatsScreenMixin"
+    "core.stats.StatsScreenMixin",
+    "network.ClientPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
