@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins.scoreboard;
+package me.fallenbreath.morestatistics.mixins.scoreboard.blockPlacedCount;
 
 import me.fallenbreath.morestatistics.MoreStatisticsScoreboardCriterion;
 import net.minecraft.item.BlockItem;

@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins.stats;
+package me.fallenbreath.morestatistics.mixins.stats.firework_boost;
 
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 
 @Mixin(FireworkItem.class)
 public abstract class FireworkItemMixin
