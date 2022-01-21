@@ -1,6 +1,15 @@
 plugins {
 	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
+
+	// https://github.com/Juuxel/loom-quiltflower-mini
+	id 'io.github.juuxel.loom-quiltflower-mini' version '1.2.1'
+}
+
+repositories {
+	maven {
+		url 'https://jitpack.io'
+	}
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -25,20 +34,18 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+	// runtime mods
+	modRuntimeOnly "com.github.astei:lazydfu:0.1.2"  // faster startup
+
 	modImplementation fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
 	include fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)
 }
 
 processResources {
-	inputs.property "version", project.version
+	inputs.property "version", fullModVersion
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
-		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
+	filesMatching("fabric.mod.json") {
+		expand "version": fullModVersion
 	}
 }
 

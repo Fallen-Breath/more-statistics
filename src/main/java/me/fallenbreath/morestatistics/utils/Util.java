@@ -16,20 +16,12 @@ public class Util
 	{
 		if (world.getServer() != null)
 		{
-			Vec3d pos = new Vec3d(blockPos).add(0.5D, 0.5D, 0.5D);
+			Vec3d center = new Vec3d(blockPos).add(0.5D, 0.5D, 0.5D);
 			world.getServer().getPlayerManager().getPlayerList().stream()
-					.filter(
-							player -> !(noSpectator && player.isSpectator())
-					)
-					.filter(
-							player -> player.squaredDistanceTo(pos) <= radius * radius
-					)
-					.min(Comparator.comparingDouble(
-							player -> player.squaredDistanceTo(pos)
-					))
-					.ifPresent(
-							player -> player.increaseStat(stat, amount)
-					);
+					.filter(player -> !(noSpectator && player.isSpectator()))
+					.filter(player -> player.squaredDistanceTo(center) <= radius * radius)
+					.min(Comparator.comparingDouble(player -> player.squaredDistanceTo(center)))
+					.ifPresent(player -> player.increaseStat(stat, amount));
 		}
 	}
 
@@ -46,10 +38,6 @@ public class Util
 
 	public static List<String> nbt2StringList(CompoundTag nbt)
 	{
-		if (nbt == null)
-		{
-			return null;
-		}
 		List<String> list = Lists.newArrayList();
 		int length = nbt.getInt("length");
 		for (int i = 0; i < length; i++)
