@@ -1,4 +1,4 @@
-package me.fallenbreath.morestatistics.mixins.stats;
+package me.fallenbreath.morestatistics.mixins.stats.firework_boost;
 
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import net.minecraft.entity.player.PlayerEntity;
