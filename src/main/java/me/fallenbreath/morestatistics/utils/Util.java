@@ -1,13 +1,13 @@
 package me.fallenbreath.morestatistics.utils;
 
 import com.google.common.collect.Lists;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 
 import java.util.List;
 
 public class Util
 {
-	public static CompoundTag stringList2Nbt(List<String> list)
+	public static NbtCompound stringList2Nbt(List<String> list)
 	{
 		NbtCompound nbt = new NbtCompound();
 		nbt.putInt("length", list.size());
