@@ -1,9 +1,9 @@
 More Statistics
 -----------
 
-A light-weight mod to add custom statistics to the game
+A light-weight mod to add custom statistics to the game and more
 
-Install it on your fabric server and enjoy new statistics and more
+Install it on your fabric server and enjoy new statistics
 
 If you have also installed it on your client you can query the custom statistics in the statistics screen too
 
@@ -26,7 +26,7 @@ Criteria: `minecraft.custom:minecraft.firework_boost`
 
 When the player uses an ender pearl to teleport, the value of this statistic will increase the distance between the teleportation's origin position and destination position
 
-Criteria: `minecraft.custom:minecraft.firework_boost`
+Criteria: `minecraft.custom:minecraft.ender_pearl_one_cm`
 
 
 # Scoreboard Criterion
@@ -36,4 +36,6 @@ Criteria: `minecraft.custom:minecraft.firework_boost`
 Triggers when a player places a block
 
 Technically the time it gets triggered is right after a player uses a `BlockItem` successfully
+
+Criteria: `blockPlacedCount`
 
