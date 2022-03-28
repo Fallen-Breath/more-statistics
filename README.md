@@ -28,6 +28,11 @@ When the player uses an ender pearl to teleport, the value of this statistic wil
 
 Criteria: `minecraft.custom:minecraft.ender_pearl_one_cm`
 
+## break_block
+
+When a block is broken, the player who broke the block increases this stat by 1
+
+Criteria: `minecraft.custom:minecraft.break_block`
 
 # Scoreboard Criterion
 
