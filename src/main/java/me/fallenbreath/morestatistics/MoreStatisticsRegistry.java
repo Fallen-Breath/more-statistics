@@ -14,6 +14,7 @@ public class MoreStatisticsRegistry
 	public static final Identifier BREAK_BEDROCK = register("break_bedrock", StatFormatter.DEFAULT);
 	public static final Identifier FIREWORK_BOOST = register("firework_boost", StatFormatter.DEFAULT);
 	public static final Identifier ENDER_PEARL_ONE_CM = register("ender_pearl_one_cm", StatFormatter.DISTANCE);
+	public static final Identifier BREAK_BLOCK = register("break_block", StatFormatter.DEFAULT);
 
 	private static Identifier register(String name, StatFormatter statFormatter)
 	{
