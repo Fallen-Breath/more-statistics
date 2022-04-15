@@ -1,6 +1,8 @@
 More Statistics
 -----------
 
+[![Modrinth](https://img.shields.io/modrinth/dt/EhoUIqvO?label=Modrinth%20Downloads)](https://modrinth.com/mod/more-statistics)
+
 A light-weight mod to add custom statistics to the game and more
 
 Install it on your fabric server and enjoy new statistics
