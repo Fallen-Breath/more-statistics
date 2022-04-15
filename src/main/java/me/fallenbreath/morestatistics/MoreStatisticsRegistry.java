@@ -12,8 +12,9 @@ public class MoreStatisticsRegistry
 {
 	private static final Set<Identifier> STATS_SET = Sets.newLinkedHashSet();
 	public static final Identifier BREAK_BEDROCK = register("break_bedrock", StatFormatter.DEFAULT);
-	public static final Identifier FIREWORK_BOOST = register("firework_boost", StatFormatter.DEFAULT);
 	public static final Identifier ENDER_PEARL_ONE_CM = register("ender_pearl_one_cm", StatFormatter.DISTANCE);
+	public static final Identifier FIREWORK_BOOST = register("firework_boost", StatFormatter.DEFAULT);
+	public static final Identifier MEND_DURABILITY = register("mend_durability", StatFormatter.DEFAULT);
 
 	private static Identifier register(String name, StatFormatter statFormatter)
 	{

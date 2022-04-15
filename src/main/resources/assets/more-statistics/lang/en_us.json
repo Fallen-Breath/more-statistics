@@ -1,5 +1,6 @@
 {
   "stat.minecraft.break_bedrock": "Bedrock broken using headless piston",
+  "stat.minecraft.ender_pearl_one_cm": "Distance teleported with ender pearl",
   "stat.minecraft.firework_boost": "Firework used to boost",
-  "stat.minecraft.ender_pearl_one_cm": "Distance teleported with ender pearl"
+  "stat.minecraft.mend_durability": "Durability repaired by mending"
 }
