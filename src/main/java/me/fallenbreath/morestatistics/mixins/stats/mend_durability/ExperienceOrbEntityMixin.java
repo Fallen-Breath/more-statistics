@@ -11,13 +11,14 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class ExperienceOrbEntityMixin
 {
 	@ModifyVariable(
-			method = "onPlayerCollision",
+			method = "repairPlayerGears",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"
-			)
+			),
+			ordinal = 1
 	)
-	private int onMendingApplied(int durabilityMended, PlayerEntity player)
+	private int onMendingApplied(int durabilityMended, PlayerEntity player, int amount)
 	{
 		player.increaseStat(MoreStatisticsRegistry.MEND_DURABILITY, durabilityMended);
 		return durabilityMended;
