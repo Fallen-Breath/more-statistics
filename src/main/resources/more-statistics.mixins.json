@@ -18,7 +18,8 @@
     "stats.break_bedrock.MinecraftServerMixin",
     "stats.break_bedrock.PistonBlockMixin",
     "stats.ender_pearl_one_cm.EnderPearlEntityMixin",
-    "stats.firework_boost.FireworkItemMixin"
+    "stats.firework_boost.FireworkItemMixin",
+    "stats.mend_durability.ExperienceOrbEntityMixin"
   ],
   "client": [
     "core.stats.StatsScreenMixin",
