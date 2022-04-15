@@ -1,9 +1,11 @@
 More Statistics
 -----------
 
-A light-weight mod to add custom statistics to the game
+[![Modrinth](https://img.shields.io/modrinth/dt/EhoUIqvO?label=Modrinth%20Downloads)](https://modrinth.com/mod/more-statistics)
 
-Install it on your fabric server and enjoy new statistics and more
+A light-weight mod to add custom statistics to the game and more
+
+Install it on your fabric server and enjoy new statistics
 
 If you have also installed it on your client you can query the custom statistics in the statistics screen too
 
@@ -16,17 +18,23 @@ When a bedrock is deleted by a piston or a sticky piston, the player who placed 
 
 Criteria: `minecraft.custom:minecraft.break_bedrock`
 
+## ender_pearl_one_cm
+
+When the player uses an ender pearl to teleport, the value of this statistic will increase the distance between the teleportation's origin position and destination position
+
+Criteria: `minecraft.custom:minecraft.ender_pearl_one_cm`
+
 ## firework_boost
 
 Increases when a player uses a firework rocket to speed up in elytra flight
 
 Criteria: `minecraft.custom:minecraft.firework_boost`
 
-## ender_pearl_one_cm
+## mend_durability
 
-When the player uses an ender pearl to teleport, the value of this statistic will increase the distance between the teleportation's origin position and destination position
+Increases when a player repair an item with mending enchantment
 
-Criteria: `minecraft.custom:minecraft.firework_boost`
+Criteria: `minecraft.custom:minecraft.mend_durability`
 
 
 # Scoreboard Criterion
@@ -36,4 +44,6 @@ Criteria: `minecraft.custom:minecraft.firework_boost`
 Triggers when a player places a block
 
 Technically the time it gets triggered is right after a player uses a `BlockItem` successfully
+
+Criteria: `blockPlacedCount`
 
