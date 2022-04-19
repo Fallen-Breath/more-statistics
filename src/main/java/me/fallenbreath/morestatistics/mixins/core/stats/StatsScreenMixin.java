@@ -1,6 +1,7 @@
 package me.fallenbreath.morestatistics.mixins.core.stats;
 
 import me.fallenbreath.morestatistics.network.ClientHandler;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.StatsScreen;
 import net.minecraft.text.Text;
@@ -20,9 +21,14 @@ public abstract class StatsScreenMixin extends Screen
 	@Inject(method = "init", at = @At(value = "HEAD"))
 	private void onStatsScreenInit(CallbackInfo ci)
 	{
-		if (this.minecraft != null && this.minecraft.getNetworkHandler() != null)
+		//#if MC >= 11600
+		//$$ MinecraftClient mc = this.client;
+		//#else
+		MinecraftClient mc = this.minecraft;
+		//#endif
+		if (mc != null && mc.getNetworkHandler() != null)
 		{
-			ClientHandler.sendAcceptedStatList(this.minecraft.getNetworkHandler());
+			ClientHandler.sendAcceptedStatList(mc.getNetworkHandler());
 		}
 	}
 }

@@ -17,7 +17,11 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 public abstract class PistonBlockMixin
 {
 	@ModifyArgs(
+			//#if MC >= 11600
+			//$$ method = "onSyncedBlockEvent",
+			//#else
 			method = "onBlockAction",
+			//#endif
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/world/World;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"

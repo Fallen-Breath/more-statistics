@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class PistonPlacingMemory
 {
-	private static final Map<Pair<DimensionType, BlockPos>, ServerPlayerEntity> MEMORY = Maps.newHashMap();
+	private static final Map<Pair<DimensionWrapper, BlockPos>, ServerPlayerEntity> MEMORY = Maps.newHashMap();
 
 	public static void onPlayerPlacedPiston(ServerPlayerEntity player, BlockPos pos)
 	{
@@ -25,9 +25,9 @@ public class PistonPlacingMemory
 		return MEMORY.get(makePair(world, pos));
 	}
 
-	private static Pair<DimensionType, BlockPos> makePair(World world, BlockPos pos)
+	private static Pair<DimensionWrapper, BlockPos> makePair(World world, BlockPos pos)
 	{
-		return Pair.of(world.getDimension().getType(), pos);
+		return Pair.of(DimensionWrapper.of(world), pos);
 	}
 
 	public static void cleanMemory()
