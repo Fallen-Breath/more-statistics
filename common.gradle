@@ -3,8 +3,10 @@ apply plugin: 'fabric-loom'
 apply plugin: 'io.github.juuxel.loom-quiltflower'
 apply plugin: 'com.replaymod.preprocess'
 
+int mcVersion = 1
+
 preprocess {
-	vars.put("MC", project.minecraft_version_number as int)
+	mcVersion = vars.get()["MC"]
 	tabIndentation = true
 }
 
@@ -32,8 +34,10 @@ dependencies {
 
 loom {
 	runConfigs.all {
+		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
 		ideConfigGenerated = true
-		runDir = '../../run'
+		runDir '../../run'
+		vmArgs '-Dmixin.debug.export=true'
 	}
 }
 
@@ -46,17 +50,14 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 String versionSuffix = ''
 if (System.getenv("BUILD_RELEASE") != "true") {
-	versionSuffix += '-SHAPSHOT'
 	String buildNumber = System.getenv("BUILD_ID")
-	if (buildNumber != null) {
-		versionSuffix += '+build.' + buildNumber
-	}
+	versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SHAPSHOT'
 }
 String fullModVersion = project.mod_version + versionSuffix
 
-archivesBaseName = project.archives_base_name
-version = 'mc' + project.minecraft_version + '-v' + fullModVersion
-group = project.maven_group
+version = 'v' + fullModVersion
+group = project.parent.maven_group
+archivesBaseName = project.parent.archives_base_name + '-mc' + project.minecraft_version
 
 processResources {
 	inputs.property "version", fullModVersion
@@ -64,7 +65,7 @@ processResources {
 	filesMatching("fabric.mod.json") {
 		def valueMap = [
 				"version": fullModVersion,
-				"minecraft_dependency": project.minecraft_dependency
+				"minecraft_dependency": project.minecraft_dependency,
 		]
 		expand valueMap
 	}
@@ -94,6 +95,8 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
+			artifactId archivesBaseName
+
 			from components.java
 		}
 	}
