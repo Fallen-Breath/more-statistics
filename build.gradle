@@ -1,13 +1,16 @@
 plugins {
     id 'maven-publish'
-    id 'fabric-loom' version '0.12-SNAPSHOT' apply false
+    id 'fabric-loom' version '1.0-SNAPSHOT' apply false
 
     // https://github.com/Juuxel/LoomQuiltflower
-    id 'io.github.juuxel.loom-quiltflower' version '1.7.0' apply false
+    id 'io.github.juuxel.loom-quiltflower' version '1.7.4' apply false
 
     // https://github.com/ReplayMod/preprocessor
     // https://github.com/Fallen-Breath/preprocessor
-    id 'com.replaymod.preprocess' version 'b7207cffa9'
+    id 'com.replaymod.preprocess' version '897c4096e2'
+
+    // https://github.com/Fallen-Breath/yamlang
+    id 'me.fallenbreath.yamlang' version '1.1.0' apply false
 }
 
 preprocess {
@@ -16,7 +19,7 @@ preprocess {
     def mc116 = createNode('1.16.5', 11605, 'yarn')
     def mc117 = createNode('1.17.1', 11701, 'yarn')
     def mc118 = createNode('1.18.2', 11802, 'yarn')
-    def mc119 = createNode('1.19'  , 11900, 'yarn')
+    def mc119 = createNode('1.19.x', 11903, 'yarn')
 
     mc115.link(mc114, null)
     mc115.link(mc116, null)

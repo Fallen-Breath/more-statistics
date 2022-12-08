@@ -6,6 +6,10 @@ import net.minecraft.stat.StatFormatter;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+//#if MC >= 11903
+//$$ import net.minecraft.registry.Registries;
+//#endif
+
 import java.util.Set;
 
 public class MoreStatisticsRegistry
@@ -20,7 +24,14 @@ public class MoreStatisticsRegistry
 	{
 		// vanilla stuffs, just like net.minecraft.stat.Stats#register
 		Identifier statId = new Identifier(name);  // using minecraft namespace. it's fine xd
-		Registry.register(Registry.CUSTOM_STAT, statId, statId);
+		Registry.register(
+				//#if MC >= 11903
+				//$$ Registries.CUSTOM_STAT,
+				//#else
+				Registry.CUSTOM_STAT,
+				//#endif
+				statId, statId
+		);
 		StatsAccessor.getCUSTOM().getOrCreateStat(statId, statFormatter);
 
 		// our stuffs

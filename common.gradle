@@ -2,6 +2,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'fabric-loom'
 apply plugin: 'io.github.juuxel.loom-quiltflower'
 apply plugin: 'com.replaymod.preprocess'
+apply plugin: 'me.fallenbreath.yamlang'
 
 int mcVersion = 1
 
@@ -26,7 +27,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// runtime mods
-	modRuntimeOnly "com.github.astei:lazydfu:0.1.2"  // faster startup
+	modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
 
 	// dependencies
 	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
@@ -45,8 +46,18 @@ remapJar {
 	remapperIsolation = true
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+if (mcVersion >= 11800) {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+else if (mcVersion >= 11700) {
+	sourceCompatibility = JavaVersion.VERSION_16
+	targetCompatibility = JavaVersion.VERSION_16
+}
+else {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 String versionSuffix = ''
 if (System.getenv("BUILD_RELEASE") != "true") {
@@ -69,6 +80,11 @@ processResources {
 		]
 		expand valueMap
 	}
+}
+
+yamlang {
+	targetSourceSets = [sourceSets.main]
+	inputDir = 'assets/template_mod/lang'
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
