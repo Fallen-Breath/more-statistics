@@ -38,7 +38,7 @@ Criteria: `minecraft.custom:minecraft.mend_durability`
 
 ## summon_phantom
 
-The total amount phantom you have summoned
+The total amount of phantom you have summoned
 
 Criteria: `minecraft.custom:minecraft.summon_phantom`
 
