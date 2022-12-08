@@ -36,6 +36,12 @@ Increases when a player repair an item with mending enchantment
 
 Criteria: `minecraft.custom:minecraft.mend_durability`
 
+## summon_phantom
+
+The total amount phantom you have summoned
+
+Criteria: `minecraft.custom:minecraft.summon_phantom`
+
 
 # Scoreboard Criterion
 

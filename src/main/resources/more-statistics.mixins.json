@@ -20,7 +20,8 @@
     "stats.break_bedrock.PistonBlockMixin",
     "stats.ender_pearl_one_cm.ThrownEnderpearlEntityMixin",
     "stats.firework_boost.FireworkItemMixin",
-    "stats.mend_durability.ExperienceOrbEntityMixin"
+    "stats.mend_durability.ExperienceOrbEntityMixin",
+    "stats.summon_phantom.PhantomSpawnerMixin"
   ],
   "client": [
     "core.stats.StatsScreenMixin",

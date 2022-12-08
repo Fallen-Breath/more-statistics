@@ -2,5 +2,6 @@
   "stat.minecraft.break_bedrock": "无头活塞破基岩数",
   "stat.minecraft.ender_pearl_one_cm": "末影珍珠传送距离",
   "stat.minecraft.firework_boost": "烟花加速次数",
-  "stat.minecraft.mend_durability": "经验修补修复耐久度"
+  "stat.minecraft.mend_durability": "经验修补修复耐久度",
+  "stat.minecraft.summon_phantom": "幻翼召唤次数"
 }
