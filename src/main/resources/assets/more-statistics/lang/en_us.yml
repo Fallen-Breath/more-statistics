@@ -1,0 +1,6 @@
+stat.minecraft:
+  break_bedrock: Bedrock broken using headless piston
+  ender_pearl_one_cm: Distance teleported with ender pearl
+  firework_boost: Firework used to boost
+  mend_durability: Durability repaired by mending
+  summon_phantom: Phantom summoned
