@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "more-statistics",
+  "id": "${id}",
   "version": "${version}",
 
-  "name": "More Statistics",
+  "name": "${name}",
   "description": "Add more statistics to Minecraft",
   "authors": [
     "Fallen_Breath"
