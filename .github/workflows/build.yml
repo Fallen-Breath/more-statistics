@@ -8,7 +8,7 @@ on:
         required: false
         default: false
       target_subproject:
-        description: The subproject name of the specified Minecraft version to be built. Leave it empty to build all
+        description: see release.yml, leave it empty to build all
         type: string
         required: false
         default: ''
@@ -32,32 +32,44 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
             ./.gradle/loom-cache
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener', 'settings.json') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Get subproject name to build
-        id: subproject_info
-        run: |
-          if [ "${{ inputs.target_subproject }}" != "" ]
-          then
-              echo "prefix=${{ inputs.target_subproject }}:" >> $GITHUB_OUTPUT
-          else
-              echo "prefix=" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Build with Gradle
+      - name: Build with gradle
         run: |
           chmod +x gradlew
-          ./gradlew ${{ steps.subproject_info.outputs.prefix }}build --no-daemon
+          if [ -z "${{ inputs.target_subproject }}" ]; then
+              echo "Building all subprojects"
+              ./gradlew build
+          else
+              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:build/' | paste -sd ' ')
+              echo "Building with arguments=$args"
+              ./gradlew $args
+          fi
         env:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
           path: versions/*/build/libs/
+
+#      - name: Publish with gradle
+#        run: |
+#          if [ -z "${{ inputs.target_subproject }}" ]; then
+#              echo "Publishing all subprojects"
+#              ./gradlew publish
+#          else
+#              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:publish/' | paste -sd ' ')
+#              echo "Publishing with arguments=$args"
+#              ./gradlew $args
+#          fi
+#        env:
+#          BUILD_RELEASE: ${{ inputs.release }}
+#          FALLENS_MAVEN_TOKEN: ${{ secrets.FALLENS_MAVEN_TOKEN }}
 
   summary:
     runs-on: ubuntu-22.04
@@ -74,6 +86,6 @@ jobs:
           path: build-artifacts
 
       - name: Make build summary
-        run: python3 .github/workflows/scripts/summary.py  # Python 3.10.6
+        run: python3 .github/workflows/scripts/summary.py  # ubuntu-22.04 uses Python 3.10.6
         env:
           TARGET_SUBPROJECT: ${{ inputs.target_subproject }}
