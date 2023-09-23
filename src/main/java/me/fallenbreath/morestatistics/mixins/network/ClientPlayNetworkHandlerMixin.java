@@ -36,12 +36,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //#if MC >= 12002
-//$$ import net.minecraft.client.MinecraftClient;
 //$$ import net.minecraft.client.network.ClientCommonNetworkHandler;
 //$$ import net.minecraft.client.network.ClientConnectionState;
 //$$ import net.minecraft.network.ClientConnection;
 //$$ import net.minecraft.network.packet.CustomPayload;
-//$$ import org.spongepowered.asm.mixin.Shadow;
 //#endif
 
 @Environment(EnvType.CLIENT)
