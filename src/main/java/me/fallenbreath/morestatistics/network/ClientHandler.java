@@ -28,7 +28,6 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 
 import java.util.Collections;
 import java.util.List;
@@ -40,14 +39,14 @@ public class ClientHandler
 {
 	private static Set<String> SCOREBOARD_CRITERION_NAMES = Collections.emptySet();
 
-	public static void handleServerPacket(PacketByteBuf data, ClientPlayerEntity player)
+	public static void handleServerPacket(MoreStatisticsPayload payload, ClientPlayerEntity player)
 	{
-		int id = data.readVarInt();
+		int id = payload.getPacketId();
 		switch (id)
 		{
 			case Network.S2C.SCOREBOARD_CRITERION_LIST:
-				CompoundTag nbt = Objects.requireNonNull(data.readCompoundTag());
-				SCOREBOARD_CRITERION_NAMES = Sets.newHashSet(Util.nbt2StringList(nbt));
+				CompoundTag nbt = Objects.requireNonNull(payload.getNbt());
+				SCOREBOARD_CRITERION_NAMES = Sets.newHashSet(Util.nbt2StringList(nbt.getCompound("data")));
 				MoreStatisticsMod.LOGGER.debug("Received CRITERION NAMES: {}", SCOREBOARD_CRITERION_NAMES);
 				break;
 		}
@@ -61,14 +60,13 @@ public class ClientHandler
 	public static void sendAcceptedStatList(ClientPlayNetworkHandler clientPlayNetworkHandler)
 	{
 		List<String> myAcceptedStats = MoreStatisticsRegistry.getStatsSet().stream().map(Identifier::toString).collect(Collectors.toList());
-		clientPlayNetworkHandler.sendPacket(Network.C2S.packet(buf -> buf.
-				writeVarInt(Network.C2S.STATS_LIST).
-				writeCompoundTag(Util.stringList2Nbt(myAcceptedStats))
-		));
+		clientPlayNetworkHandler.sendPacket(Network.C2S.packet(Network.C2S.STATS_LIST, nbt -> {
+			nbt.put("data", Util.stringList2Nbt(myAcceptedStats));
+		}));
 	}
 
 	public static void requestScoreboardCriterionList(ClientPlayNetworkHandler clientPlayNetworkHandler)
 	{
-		clientPlayNetworkHandler.sendPacket(Network.C2S.packet(buf -> buf.writeVarInt(Network.C2S.SCOREBOARD_CRITERION_QUERY)));
+		clientPlayNetworkHandler.sendPacket(Network.C2S.packet(Network.C2S.SCOREBOARD_CRITERION_QUERY, nbt -> {}));
 	}
 }

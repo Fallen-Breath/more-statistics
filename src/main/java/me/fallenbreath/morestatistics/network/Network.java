@@ -22,6 +22,7 @@ package me.fallenbreath.morestatistics.network;
 
 import io.netty.buffer.Unpooled;
 import me.fallenbreath.morestatistics.MoreStatisticsMod;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.util.Identifier;
@@ -31,18 +32,26 @@ import java.util.function.Consumer;
 
 public class Network
 {
-	public static final Identifier CHANNEL = MoreStatisticsMod.id("network");
+	public static final Identifier CHANNEL = MoreStatisticsMod.id("network_v2");
 
 	public static class C2S
 	{
 		public static final int STATS_LIST = 1;
 		public static final int SCOREBOARD_CRITERION_QUERY = 2;
 
-		public static CustomPayloadC2SPacket packet(Consumer<PacketByteBuf> byteBufBuilder)
+		public static CustomPayloadC2SPacket packet(int packetId, Consumer<CompoundTag> payloadBuilder)
 		{
+			CompoundTag nbt = new CompoundTag();
+			payloadBuilder.accept(nbt);
+
+			//#if MC >= 12002
+			//$$ return new CustomPayloadC2SPacket(new MoreStatisticsPayload(packetId, nbt));
+			//#else
 			PacketByteBuf packetByteBuf = new PacketByteBuf(Unpooled.buffer());
-			byteBufBuilder.accept(packetByteBuf);
+			packetByteBuf.writeVarInt(packetId);
+			packetByteBuf.writeCompoundTag(nbt);
 			return new CustomPayloadC2SPacket(CHANNEL, packetByteBuf);
+			//#endif
 		}
 	}
 
@@ -50,11 +59,19 @@ public class Network
 	{
 		public static final int SCOREBOARD_CRITERION_LIST = 1;
 
-		public static CustomPayloadS2CPacket packet(Consumer<PacketByteBuf> byteBufBuilder)
+		public static CustomPayloadS2CPacket packet(int packetId, Consumer<CompoundTag> payloadBuilder)
 		{
+			CompoundTag nbt = new CompoundTag();
+			payloadBuilder.accept(nbt);
+
+			//#if MC >= 12002
+			//$$ return new CustomPayloadS2CPacket(new MoreStatisticsPayload(packetId, nbt));
+			//#else
 			PacketByteBuf packetByteBuf = new PacketByteBuf(Unpooled.buffer());
-			byteBufBuilder.accept(packetByteBuf);
+			packetByteBuf.writeVarInt(packetId);
+			packetByteBuf.writeCompoundTag(nbt);
 			return new CustomPayloadS2CPacket(CHANNEL, packetByteBuf);
+			//#endif
 		}
 	}
 }

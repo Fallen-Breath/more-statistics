@@ -29,7 +29,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stat;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -39,14 +38,14 @@ public class ServerHandler
 	private static final Object LOCK = new Object();
 	private static final Map<ServerPlayerEntity, Set<Identifier>> acceptedStats = new WeakHashMap<>();
 
-	public static void handleClientPacket(PacketByteBuf data, ServerPlayerEntity player)
+	public static void handleClientPacket(MoreStatisticsPayload payload, ServerPlayerEntity player)
 	{
-		int id = data.readVarInt();
+		int id = payload.getPacketId();
 		switch (id)
 		{
 			case Network.C2S.STATS_LIST:
-				CompoundTag nbt = Objects.requireNonNull(data.readCompoundTag());
-				List<Identifier> list = Util.nbt2StringList(nbt).stream().map(Identifier::new).collect(Collectors.toList());
+				CompoundTag nbt = Objects.requireNonNull(payload.getNbt());
+				List<Identifier> list = Util.nbt2StringList(nbt.getCompound("data")).stream().map(Identifier::new).collect(Collectors.toList());
 				MoreStatisticsMod.LOGGER.debug("Received accepted stats list from player {}: {}", player.getName().getString(), list);
 				synchronized (LOCK)
 				{
@@ -56,10 +55,9 @@ public class ServerHandler
 
 			case Network.C2S.SCOREBOARD_CRITERION_QUERY:
 				MoreStatisticsMod.LOGGER.debug("Received scoreboard criterion query from player {}", player.getName().getString());
-				player.networkHandler.sendPacket(Network.S2C.packet(buf -> buf.
-						writeVarInt(Network.S2C.SCOREBOARD_CRITERION_LIST).
-						writeCompoundTag(Util.stringList2Nbt(MoreStatisticsScoreboardCriterion.getCriterionNameList()))
-				));
+				player.networkHandler.sendPacket(Network.S2C.packet(Network.S2C.SCOREBOARD_CRITERION_LIST, nbt2 -> {
+					nbt2.put("data", Util.stringList2Nbt(MoreStatisticsScoreboardCriterion.getCriterionNameList()));
+				}));
 				break;
 		}
 	}

@@ -20,6 +20,7 @@
 
 package me.fallenbreath.morestatistics.mixins.network;
 
+import me.fallenbreath.morestatistics.network.MoreStatisticsPayload;
 import me.fallenbreath.morestatistics.network.Network;
 import me.fallenbreath.morestatistics.network.ServerHandler;
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
@@ -32,20 +33,36 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ServerPlayNetworkHandler.class)
+//#if MC >= 12002
+//$$ import net.minecraft.server.network.ServerCommonNetworkHandler;
+//#endif
+
+@Mixin(
+		//#if MC >= 12002
+		//$$ ServerCommonNetworkHandler.class
+		//#else
+		ServerPlayNetworkHandler.class
+		//#endif
+)
 public abstract class ServerPlayNetworkHandlerMixin
 {
-	@Shadow
-	public ServerPlayerEntity player;
-
 	@Inject(method = "onCustomPayload", at = @At("HEAD"), cancellable = true)
 	private void onCustomPayload(CustomPayloadC2SPacket packet, CallbackInfo ci)
 	{
+		//#if MC >= 12002
+		//$$ if (packet.payload() instanceof MoreStatisticsPayload payload && (Object)this instanceof ServerPlayNetworkHandler self)
+		//$$ {
+		//$$ 	ServerHandler.handleClientPacket(payload, self.player);
+		//$$ 	ci.cancel();
+		//$$ }
+		//#else
 		Identifier channel = ((CustomPayloadC2SPacketAccessor)packet).getChannel();
 		if (Network.CHANNEL.equals(channel))
 		{
-			ServerHandler.handleClientPacket(((CustomPayloadC2SPacketAccessor)packet).getData(), this.player);
+			MoreStatisticsPayload payload = new MoreStatisticsPayload(((CustomPayloadC2SPacketAccessor)packet).getData());
+			ServerHandler.handleClientPacket(payload, ((ServerPlayNetworkHandler)(Object)this).player);
 			ci.cancel();
 		}
+		//#endif
 	}
 }
