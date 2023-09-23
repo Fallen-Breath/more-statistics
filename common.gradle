@@ -18,6 +18,9 @@ repositories {
 	maven {
 		url 'https://www.cursemaven.com'
 	}
+	maven {
+		url 'https://maven.fallenbreath.me/releases'
+	}
 }
 
 // https://github.com/FabricMC/fabric-loader/issues/783
@@ -35,6 +38,7 @@ dependencies {
 	if (mcVersion < 11904) {
 		modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
 	}
+	modRuntimeOnly 'me.fallenbreath:mixin-auditor:0.1.0'
 
 	// dependencies
 	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
