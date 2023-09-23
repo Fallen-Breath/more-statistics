@@ -70,19 +70,19 @@ jobs:
           name: build-artifacts
           path: versions/*/build/libs/
 
-#      - name: Publish with gradle
-#        run: |
-#          if [ -z "${{ inputs.target_subproject }}" ]; then
-#              echo "Publishing all subprojects"
-#              ./gradlew publish
-#          else
-#              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:publish/' | paste -sd ' ')
-#              echo "Publishing with arguments=$args"
-#              ./gradlew $args
-#          fi
-#        env:
-#          BUILD_RELEASE: ${{ inputs.release }}
-#          FALLENS_MAVEN_TOKEN: ${{ secrets.FALLENS_MAVEN_TOKEN }}
+      - name: Publish with gradle
+        run: |
+          if [ -z "${{ inputs.target_subproject }}" ]; then
+              echo "Publishing all subprojects"
+              ./gradlew publish
+          else
+              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:publish/' | paste -sd ' ')
+              echo "Publishing with arguments=$args"
+              ./gradlew $args
+          fi
+        env:
+          BUILD_RELEASE: ${{ inputs.release }}
+          FALLENS_MAVEN_TOKEN: ${{ secrets.FALLENS_MAVEN_TOKEN }}
 
   summary:
     runs-on: ubuntu-22.04
