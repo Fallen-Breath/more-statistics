@@ -13,6 +13,7 @@ on:
         required: false
         default: ''
       mixin_audit:
+        description: run mixin audit for Minecraft server after build
         type: boolean
         required: false
         default: false
@@ -55,14 +56,13 @@ jobs:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
 
-      - name: Run Mixin Audit Check
+      - name: Run mixin audit check for Minecraft server
         if: ${{ inputs.mixin_audit }}
         timeout-minutes: 10
         run: |
           mkdir -p ./run
           echo eula=true > ./run/eula.txt
-          export JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS -DmixinAuditor.audit=true"
-          ./gradlew runServer
+          ./gradlew runServerMixinAudit
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
