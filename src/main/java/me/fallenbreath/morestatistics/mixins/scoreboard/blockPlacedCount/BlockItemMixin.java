@@ -22,11 +22,16 @@ package me.fallenbreath.morestatistics.mixins.scoreboard.blockPlacedCount;
 
 import me.fallenbreath.morestatistics.MoreStatisticsScoreboardCriterion;
 import net.minecraft.item.BlockItem;
-import net.minecraft.scoreboard.ScoreboardPlayerScore;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+//#if MC >= 12004
+//$$ import net.minecraft.scoreboard.ScoreAccess;
+//#else
+import net.minecraft.scoreboard.ScoreboardPlayerScore;
+//#endif
 
 @Mixin(BlockItem.class)
 public abstract class BlockItemMixin
@@ -45,7 +50,14 @@ public abstract class BlockItemMixin
 	)
 	private ServerPlayerEntity onPlayerPlacedBlock(ServerPlayerEntity player)
 	{
-		player.getScoreboard().forEachScore(MoreStatisticsScoreboardCriterion.BLOCK_PLACED_COUNT, player.getEntityName(), ScoreboardPlayerScore::incrementScore);
+		player.getScoreboard().forEachScore(
+				MoreStatisticsScoreboardCriterion.BLOCK_PLACED_COUNT,
+				//#if MC >= 12004
+				//$$ player, ScoreAccess::incrementScore
+				//#else
+				player.getEntityName(), ScoreboardPlayerScore::incrementScore
+				//#endif
+		);
 		return player;
 	}
 }

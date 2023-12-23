@@ -34,17 +34,17 @@ public class MoreStatisticsCommand
 
 	public static void registerCommand(CommandDispatcher<ServerCommandSource> dispatcher)
 	{
-		LiteralArgumentBuilder<ServerCommandSource> rootNode = literal(PREFIX).
-                requires(serverCommandSource -> serverCommandSource.hasPermissionLevel(2)).
-				then(literal("show").
-						then(literal(MoreStatisticsScoreboardCriterion.BLOCK_PLACED_COUNT.getName()).
-								then(CommandManager.argument("target", ScoreHolderArgumentType.scoreHolder()).
-										executes(
-												c -> showBlockPlaceCount(c.getSource(), ScoreHolderArgumentType.getScoreHolder(c, "target"))
-										)
-								)
-						)
-				);
+//		LiteralArgumentBuilder<ServerCommandSource> rootNode = literal(PREFIX).
+//                requires(serverCommandSource -> serverCommandSource.hasPermissionLevel(2)).
+//				then(literal("show").
+//						then(literal(MoreStatisticsScoreboardCriterion.BLOCK_PLACED_COUNT.getName()).
+//								then(CommandManager.argument("target", ScoreHolderArgumentType.scoreHolder()).
+//										executes(
+//												c -> showBlockPlaceCount(c.getSource(), ScoreHolderArgumentType.getScoreHolder(c, "target"))
+//										)
+//								)
+//						)
+//				);
 		// maybe not
 //		 dispatcher.register(rootNode);
 	}
