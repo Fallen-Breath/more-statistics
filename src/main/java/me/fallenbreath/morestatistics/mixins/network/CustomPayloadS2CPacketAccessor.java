@@ -26,6 +26,7 @@ import net.minecraft.util.PacketByteBuf;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+// impl in mc < 1.20.2
 @Mixin(CustomPayloadS2CPacket.class)
 public interface CustomPayloadS2CPacketAccessor
 {

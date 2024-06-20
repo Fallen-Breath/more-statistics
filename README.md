@@ -22,6 +22,8 @@ Criteria: `minecraft.custom:minecraft.break_bedrock`
 
 When the player uses an ender pearl to teleport, the value of this statistic will increase the distance between the teleportation's origin position and destination position
 
+For MC >= 1.21, only teleportations within the same dimension will increase this stat
+
 Criteria: `minecraft.custom:minecraft.ender_pearl_one_cm`
 
 ## firework_boost

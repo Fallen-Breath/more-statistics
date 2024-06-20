@@ -2,7 +2,7 @@
  * This file is part of the More Statistics project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * More Statistics is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,21 +18,27 @@
  * along with More Statistics.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package me.fallenbreath.morestatistics.mixins.network;
+package me.fallenbreath.morestatistics.utils;
 
-import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 
-// impl in mc < 1.20.2
-@Mixin(CustomPayloadC2SPacket.class)
-public interface CustomPayloadC2SPacketAccessor
+public class IdentifierUtil
 {
-	@Accessor
-	Identifier getChannel();
+	public static Identifier of(String id)
+	{
+		//#if MC >= 12100
+		//$$ return Identifier.of(id);
+		//#else
+		return new Identifier(id);
+		//#endif
+	}
 
-	@Accessor
-	PacketByteBuf getData();
+	public static Identifier of(String namespace, String path)
+	{
+		//#if MC >= 12100
+		//$$ return Identifier.of(namespace, path);
+		//#else
+		return new Identifier(namespace, path);
+		//#endif
+	}
 }

@@ -20,6 +20,7 @@
 
 package me.fallenbreath.morestatistics;
 
+import me.fallenbreath.morestatistics.utils.IdentifierUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
@@ -51,6 +52,6 @@ public class MoreStatisticsMod implements ModInitializer
 
 	public static Identifier id(String name)
 	{
-		return new Identifier(MOD_ID, name);
+		return IdentifierUtil.of(MOD_ID, name);
 	}
 }

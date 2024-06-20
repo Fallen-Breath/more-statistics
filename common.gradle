@@ -70,6 +70,11 @@ loom {
 			vmArgs '-DmixinAuditor.audit=true'
 			ideConfigGenerated false
 		}
+		clientMixinAudit {
+			client()
+			vmArgs '-DmixinAuditor.audit=true'
+			ideConfigGenerated false
+		}
 	}
 }
 

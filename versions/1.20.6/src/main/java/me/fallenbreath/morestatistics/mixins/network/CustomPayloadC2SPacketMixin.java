@@ -20,30 +20,31 @@
 
 package me.fallenbreath.morestatistics.mixins.network;
 
-import com.google.common.collect.ImmutableMap;
 import me.fallenbreath.morestatistics.network.MoreStatisticsPayload;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
-import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Mixin(CustomPayloadC2SPacket.class)
 public abstract class CustomPayloadC2SPacketMixin
 {
-	@Mutable @Shadow @Final
-	private static Map<Identifier, PacketByteBuf.PacketReader<? extends CustomPayload>> ID_TO_READER;
-
-	static
+	@ModifyArg(
+			method = "<clinit>",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/network/packet/CustomPayload;createCodec(Lnet/minecraft/network/packet/CustomPayload$CodecFactory;Ljava/util/List;)Lnet/minecraft/network/codec/PacketCodec;"
+			)
+	)
+	private static List<?> registerTISCMPayload_c2s(List<CustomPayload.Type<?, ?>> types)
 	{
-		ID_TO_READER = ImmutableMap.<Identifier, PacketByteBuf.PacketReader<? extends CustomPayload>>builder().
-				putAll(ID_TO_READER).
-				put(MoreStatisticsPayload.ID, MoreStatisticsPayload::new).
-				build();
+		types = new ArrayList<>(types);
+		types.add(new CustomPayload.Type<>(MoreStatisticsPayload.KEY, MoreStatisticsPayload.CODEC));
+		return Collections.unmodifiableList(types);
 	}
 }

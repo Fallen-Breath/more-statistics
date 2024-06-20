@@ -2,7 +2,7 @@
  * This file is part of the More Statistics project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  Fallen_Breath and contributors
+ * Copyright (C) 2024  Fallen_Breath and contributors
  *
  * More Statistics is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,39 +20,27 @@
 
 package me.fallenbreath.morestatistics.mixins.stats.mend_durability;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import me.fallenbreath.morestatistics.MoreStatisticsRegistry;
 import net.minecraft.entity.ExperienceOrbEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-// impl for mc < 1.21
+// impl for mc >= 1.21
 @Mixin(ExperienceOrbEntity.class)
 public abstract class ExperienceOrbEntityMixin
 {
-	@ModifyVariable(
-			//#if MC >= 11700
-			//$$ method = "repairPlayerGears",
-			//#else
-			method = "onPlayerCollision",
-			//#endif
+	@ModifyExpressionValue(
+			method = "repairPlayerGears",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"
-			//#if MC >= 11700
-			//$$ ),
-			//$$ ordinal = 1
-			//#else
+					target = "Lnet/minecraft/enchantment/EnchantmentHelper;getRepairWithXp(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;I)I",
+					ordinal = 0
 			)
-			//#endif
 	)
-	private int onMendingApplied(
-			int durabilityMended, PlayerEntity player
-			//#if MC >= 11700
-			//$$ , int amount
-			//#endif
-	)
+	private int onMendingApplied(int durabilityMended, @Local(argsOnly = true) ServerPlayerEntity player)
 	{
 		player.increaseStat(MoreStatisticsRegistry.MEND_DURABILITY, durabilityMended);
 		return durabilityMended;

@@ -22,6 +22,7 @@ package me.fallenbreath.morestatistics;
 
 import com.google.common.collect.Sets;
 import me.fallenbreath.morestatistics.mixins.core.stats.StatsAccessor;
+import me.fallenbreath.morestatistics.utils.IdentifierUtil;
 import net.minecraft.stat.StatFormatter;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -44,7 +45,7 @@ public class MoreStatisticsRegistry
 	private static Identifier register(String name, StatFormatter statFormatter)
 	{
 		// vanilla stuffs, just like net.minecraft.stat.Stats#register
-		Identifier statId = new Identifier(name);  // using minecraft namespace. it's fine xd
+		Identifier statId = IdentifierUtil.of(name);  // using minecraft namespace. it's fine xd
 		Registry.register(
 				//#if MC >= 11903
 				//$$ Registries.CUSTOM_STAT,

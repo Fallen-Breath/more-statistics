@@ -24,12 +24,21 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 
+//#if MC >= 12005
+//$$ import net.minecraft.network.codec.PacketCodec;
+//$$ import net.minecraft.network.packet.CustomPayload;
+//#endif
+
+
 public class MoreStatisticsPayload
 		//#if MC >= 12002
-		//$$ implements net.minecraft.network.packet.CustomPayload
+		//$$ implements CustomPayload
 		//#endif
 {
-	public static final Identifier ID = Network.CHANNEL;
+	//#if MC >= 12005
+	//$$ public static final CustomPayload.Id<MoreStatisticsPayload> KEY = new CustomPayload.Id<>(Network.CHANNEL);
+	//$$ public static final PacketCodec<PacketByteBuf, MoreStatisticsPayload> CODEC = CustomPayload.codecOf(MoreStatisticsPayload::write, MoreStatisticsPayload::new);
+	//#endif
 
 	private final int id;
 	private final CompoundTag nbt;
@@ -45,8 +54,7 @@ public class MoreStatisticsPayload
 		this(buf.readVarInt(), buf.readCompoundTag());
 	}
 
-	//#if MC >= 12002
-	//$$ @Override
+	//#if MC >= 12005
 	//$$ public void write(PacketByteBuf buf)
 	//$$ {
 	//$$ 	buf.writeVarInt(this.id);
@@ -54,9 +62,9 @@ public class MoreStatisticsPayload
 	//$$ }
 	//$$
 	//$$ @Override
-	//$$ public Identifier id()
+	//$$ public Id<? extends CustomPayload> getId()
 	//$$ {
-	//$$ 	return ID;
+	//$$ 	return KEY;
 	//$$ }
 	//#endif
 
