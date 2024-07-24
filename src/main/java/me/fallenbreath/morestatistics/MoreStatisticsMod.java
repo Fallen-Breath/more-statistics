@@ -20,6 +20,7 @@
 
 package me.fallenbreath.morestatistics;
 
+import me.fallenbreath.morestatistics.network.Network;
 import me.fallenbreath.morestatistics.utils.IdentifierUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -38,6 +39,8 @@ public class MoreStatisticsMod implements ModInitializer
 	public void onInitialize()
 	{
 		version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
+
+		Network.init();
 	}
 
 	public static String getModId()

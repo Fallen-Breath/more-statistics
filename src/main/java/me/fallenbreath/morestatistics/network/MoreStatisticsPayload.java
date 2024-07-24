@@ -20,26 +20,12 @@
 
 package me.fallenbreath.morestatistics.network;
 
+import me.fallenbreath.fanetlib.api.nbt.FanetlibNbtUtils;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 
-//#if MC >= 12005
-//$$ import net.minecraft.network.codec.PacketCodec;
-//$$ import net.minecraft.network.packet.CustomPayload;
-//#endif
-
-
 public class MoreStatisticsPayload
-		//#if MC >= 12002
-		//$$ implements CustomPayload
-		//#endif
 {
-	//#if MC >= 12005
-	//$$ public static final CustomPayload.Id<MoreStatisticsPayload> KEY = new CustomPayload.Id<>(Network.CHANNEL);
-	//$$ public static final PacketCodec<PacketByteBuf, MoreStatisticsPayload> CODEC = CustomPayload.codecOf(MoreStatisticsPayload::write, MoreStatisticsPayload::new);
-	//#endif
-
 	private final int id;
 	private final CompoundTag nbt;
 
@@ -51,22 +37,14 @@ public class MoreStatisticsPayload
 
 	public MoreStatisticsPayload(PacketByteBuf buf)
 	{
-		this(buf.readVarInt(), buf.readCompoundTag());
+		this(buf.readVarInt(), FanetlibNbtUtils.readNbtAuto(buf));
 	}
 
-	//#if MC >= 12005
-	//$$ public void write(PacketByteBuf buf)
-	//$$ {
-	//$$ 	buf.writeVarInt(this.id);
-	//$$ 	buf.writeNbt(this.nbt);
-	//$$ }
-	//$$
-	//$$ @Override
-	//$$ public Id<? extends CustomPayload> getId()
-	//$$ {
-	//$$ 	return KEY;
-	//$$ }
-	//#endif
+	public void write(PacketByteBuf buf)
+	{
+		buf.writeVarInt(this.id);
+	 	buf.writeCompoundTag(this.nbt);
+	}
 
 	public int getPacketId()
 	{

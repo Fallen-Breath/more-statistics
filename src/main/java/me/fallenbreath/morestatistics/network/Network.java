@@ -20,19 +20,22 @@
 
 package me.fallenbreath.morestatistics.network;
 
-import io.netty.buffer.Unpooled;
+import me.fallenbreath.fanetlib.api.event.FanetlibClientEvents;
+import me.fallenbreath.fanetlib.api.packet.FanetlibPackets;
+import me.fallenbreath.fanetlib.api.packet.PacketCodec;
+import me.fallenbreath.fanetlib.api.packet.PacketId;
 import me.fallenbreath.morestatistics.MoreStatisticsMod;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 
 import java.util.function.Consumer;
 
 public class Network
 {
-	public static final Identifier CHANNEL = MoreStatisticsMod.id("network_v2");
+	public static final PacketId<MoreStatisticsPayload> FANETLIB_PACKET_ID = PacketId.of(MoreStatisticsMod.id("network_v2"));
 
 	public static class C2S
 	{
@@ -43,15 +46,7 @@ public class Network
 		{
 			CompoundTag nbt = new CompoundTag();
 			payloadBuilder.accept(nbt);
-
-			//#if MC >= 12002
-			//$$ return new CustomPayloadC2SPacket(new MoreStatisticsPayload(packetId, nbt));
-			//#else
-			PacketByteBuf packetByteBuf = new PacketByteBuf(Unpooled.buffer());
-			packetByteBuf.writeVarInt(packetId);
-			packetByteBuf.writeCompoundTag(nbt);
-			return new CustomPayloadC2SPacket(CHANNEL, packetByteBuf);
-			//#endif
+			return FanetlibPackets.createC2S(FANETLIB_PACKET_ID, new MoreStatisticsPayload(packetId, nbt));
 		}
 	}
 
@@ -63,15 +58,24 @@ public class Network
 		{
 			CompoundTag nbt = new CompoundTag();
 			payloadBuilder.accept(nbt);
+			return FanetlibPackets.createS2C(FANETLIB_PACKET_ID, new MoreStatisticsPayload(packetId, nbt));
+		}
+	}
 
-			//#if MC >= 12002
-			//$$ return new CustomPayloadS2CPacket(new MoreStatisticsPayload(packetId, nbt));
-			//#else
-			PacketByteBuf packetByteBuf = new PacketByteBuf(Unpooled.buffer());
-			packetByteBuf.writeVarInt(packetId);
-			packetByteBuf.writeCompoundTag(nbt);
-			return new CustomPayloadS2CPacket(CHANNEL, packetByteBuf);
-			//#endif
+	public static void init()
+	{
+		FanetlibPackets.registerDual(
+				FANETLIB_PACKET_ID,
+				PacketCodec.of(MoreStatisticsPayload::write, MoreStatisticsPayload::new),
+				(payload, ctx) -> ServerHandler.handleClientPacket(payload, ctx.getPlayer()),
+				(payload, ctx) -> ClientHandler.handleServerPacket(payload, ctx.getPlayer())
+		);
+
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT)
+		{
+			FanetlibClientEvents.registerGameJoinListener((client, networkHandler) -> {
+				ClientHandler.requestScoreboardCriterionList(networkHandler);
+			});
 		}
 	}
 }

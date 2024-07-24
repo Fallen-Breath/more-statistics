@@ -41,6 +41,9 @@ dependencies {
 
 	// dependencies
 	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
+
+	def fanetlibMcVer = mcVersion >= 12100 ? '1.21' : mcVersion >= 12006 ? '1.20.6' : mcVersion >= 12002 ? '1.20.2': '1.15.2'
+	include(modImplementation("me.fallenbreath:fanetlib:${project.fanetlib_version}-mc${fanetlibMcVer}"))
 }
 
 String MIXIN_CONFIG_PATH = 'more-statistics.mixins.json'

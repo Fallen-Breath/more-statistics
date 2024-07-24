@@ -11,11 +11,6 @@
     "core.stats.ServerStatHandlerMixin",
     "core.stats.StatsAccessor",
     "core.stats.StatsMixin",
-    "network.CustomPayloadC2SPacketAccessor",
-    "network.CustomPayloadC2SPacketMixin",
-    "network.CustomPayloadS2CPacketAccessor",
-    "network.CustomPayloadS2CPacketMixin",
-    "network.ServerPlayNetworkHandlerMixin",
     "scoreboard.blockPlacedCount.BlockItemMixin",
     "stats.break_bedrock.BlockItemMixin",
     "stats.break_bedrock.MinecraftServerMixin",
@@ -26,8 +21,7 @@
     "stats.summon_phantom.PhantomSpawnerMixin"
   ],
   "client": [
-    "core.stats.StatsScreenMixin",
-    "network.ClientPlayNetworkHandlerMixin"
+    "core.stats.StatsScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
