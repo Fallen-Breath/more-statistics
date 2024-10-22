@@ -34,7 +34,11 @@ public abstract class MinecraftServerMixin
 			method = "tickWorlds",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12102
+					//$$ target = "Lnet/minecraft/server/MinecraftServer;tickNetworkIo()V"
+					//#else
 					target = "Lnet/minecraft/server/ServerNetworkIo;tick()V"
+					//#endif
 			)
 	)
 	private void cleanPistonPlacingMemory(CallbackInfo ci)
