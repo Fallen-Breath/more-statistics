@@ -40,7 +40,7 @@ public class MoreStatisticsMod implements ModInitializer
 	{
 		version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
 
-		Network.init();
+		Network.initEvents();
 	}
 
 	public static String getModId()

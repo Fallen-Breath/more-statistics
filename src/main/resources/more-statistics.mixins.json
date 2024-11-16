@@ -11,6 +11,7 @@
     "core.stats.ServerStatHandlerMixin",
     "core.stats.StatsAccessor",
     "core.stats.StatsMixin",
+    "network.FanetlibPacketRegistrationCenterMixin",
     "scoreboard.blockPlacedCount.BlockItemMixin",
     "stats.break_bedrock.BlockItemMixin",
     "stats.break_bedrock.MinecraftServerMixin",

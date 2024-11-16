@@ -62,7 +62,7 @@ public class Network
 		}
 	}
 
-	public static void init()
+	public static void initPackets()
 	{
 		FanetlibPackets.registerDual(
 				FANETLIB_PACKET_ID,
@@ -70,7 +70,10 @@ public class Network
 				(payload, ctx) -> ServerHandler.handleClientPacket(payload, ctx.getPlayer()),
 				(payload, ctx) -> ClientHandler.handleServerPacket(payload, ctx.getPlayer())
 		);
+	}
 
+	public static void initEvents()
+	{
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT)
 		{
 			FanetlibClientEvents.registerGameJoinListener((client, networkHandler) -> {

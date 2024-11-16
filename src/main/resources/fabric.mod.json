@@ -28,6 +28,7 @@
 
   "depends": {
     "fabricloader": ">=0.11.4",
-    "minecraft": "${minecraft_dependency}"
+    "minecraft": "${minecraft_dependency}",
+    "fanetlib": ">=0.2.0"
   }
 }
