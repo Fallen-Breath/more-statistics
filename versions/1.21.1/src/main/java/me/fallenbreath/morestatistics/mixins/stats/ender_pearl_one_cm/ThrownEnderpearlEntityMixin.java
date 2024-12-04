@@ -39,7 +39,11 @@ public abstract class ThrownEnderpearlEntityMixin
 			method = "onCollision",
 			at = @At(
 					value = "INVOKE",
+					//#if MC >= 12103
+					//$$ target = "Lnet/minecraft/server/network/ServerPlayerEntity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/server/network/ServerPlayerEntity;"
+					//#else
 					target = "Lnet/minecraft/entity/Entity;teleportTo(Lnet/minecraft/world/TeleportTarget;)Lnet/minecraft/entity/Entity;"
+					//#endif
 			)
 	)
 	private void onEnderPearlHit(CallbackInfo ci, @Local Entity owner, @Local ServerWorld selfWorld)
