@@ -46,7 +46,7 @@ public class ServerHandler
 		{
 			case Network.C2S.STATS_LIST:
 				CompoundTag nbt = Objects.requireNonNull(payload.getNbt());
-				List<Identifier> list = Util.nbt2StringList(nbt.getCompound("data")).stream().map(IdentifierUtil::of).collect(Collectors.toList());
+				List<Identifier> list = Util.nbt2StringList(Util.getNbtOrEmpty(nbt, "data")).stream().map(IdentifierUtil::of).collect(Collectors.toList());
 				MoreStatisticsMod.LOGGER.debug("Received accepted stats list from player {}: {}", player.getName().getString(), list);
 				synchronized (LOCK)
 				{

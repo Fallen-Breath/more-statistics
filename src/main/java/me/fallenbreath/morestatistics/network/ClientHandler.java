@@ -46,7 +46,7 @@ public class ClientHandler
 		{
 			case Network.S2C.SCOREBOARD_CRITERION_LIST:
 				CompoundTag nbt = Objects.requireNonNull(payload.getNbt());
-				SCOREBOARD_CRITERION_NAMES = Sets.newHashSet(Util.nbt2StringList(nbt.getCompound("data")));
+				SCOREBOARD_CRITERION_NAMES = Sets.newHashSet(Util.nbt2StringList(Util.getNbtOrEmpty(nbt, "data")));
 				MoreStatisticsMod.LOGGER.debug("Received CRITERION NAMES: {}", SCOREBOARD_CRITERION_NAMES);
 				break;
 		}
