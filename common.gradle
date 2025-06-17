@@ -36,7 +36,13 @@ dependencies {
 	modRuntimeOnly 'me.fallenbreath:mixin-auditor:0.1.0'
 
 	// dependencies
-	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
+	def fabricApiModules = ["fabric-resource-loader-v0"]
+	if (mcVersion >= 12105) {  // "fabric-resource-loader-v0" dependency since fabric api 0.127.0
+		fabricApiModules.add("fabric-api-base")
+	}
+	fabricApiModules.forEach {
+		include(modImplementation(fabricApi.module(it, project.fabric_api_version)))
+	}
 
 	def fanetlibMcVer = mcVersion >= 12100 ? '1.21' : mcVersion >= 12006 ? '1.20.6' : mcVersion >= 12002 ? '1.20.2': '1.15.2'
 	include(modImplementation("me.fallenbreath:fanetlib:${project.fanetlib_version}-mc${fanetlibMcVer}"))
